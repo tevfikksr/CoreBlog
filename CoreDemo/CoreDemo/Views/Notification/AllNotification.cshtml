@@ -1,0 +1,26 @@
+﻿@using EntityLayer.Concrete
+@model List<Notification>
+@{
+    ViewData["Title"] = "AllNotification";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<h1>AllNotification</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Bildirimler</th>
+        <th>Tarih</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        TimeSpan span = item.NotificationDate.Subtract(DateTime.Now);
+        string notification = "Etkinliğe " + span.Days + " gün " + span.Hours + " saat kaldı.";
+        
+        <tr>
+            <td>@item.NotificationID</td>
+            <td>@item.NotificationDetails</td>
+            <td>@(notification)</td>
+        </tr>
+    }
+</table>
